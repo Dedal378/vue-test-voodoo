@@ -4,7 +4,7 @@ import axios from 'axios'
 import BaseSearch from './components/BaseSearch.vue'
 import BaseCard from './components/BaseCard.vue'
 
-const link = `https://jsonplaceholder.typicode.com`
+const link = import.meta.env.VITE_APP_LINK_API
 const postsLimit = 30
 let posts = ref([])
 let users = ref([])
