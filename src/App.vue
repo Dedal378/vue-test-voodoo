@@ -11,14 +11,6 @@ let users = ref([])
 const userName = ref('')
 
 const filteredUserByName = computed(() => {
-  posts.value.filter(i1 =>
-    users.value.find(i2 => {
-      if (i2.id === i1.userId) {
-        i1.author = i2.name
-      }
-    })
-  )
-
   return posts.value.filter(user => {
     if (userName.value) {
       return user.author.toLowerCase().includes(userName.value.toLowerCase())
@@ -40,9 +32,20 @@ const getData = async(apiName = 'posts', limit = postsLimit) => {
   }
 }
 
-onBeforeMount(() => {
-  getData()
-  getData('users', 3)
+const mergeArraysByName = () => {
+  posts.value.filter(i1 =>
+    users.value.find(i2 => {
+      if (i2.id === i1.userId) {
+        i1.author = i2.name
+      }
+    })
+  )
+}
+
+onBeforeMount(async () => {
+  await getData()
+  await getData('users', 3)
+  await mergeArraysByName()
 })
 </script>
 
