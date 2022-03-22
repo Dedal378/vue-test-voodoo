@@ -84,8 +84,8 @@ onBeforeMount(async () => {
       class="mb-3 mt-5 d-flex flex-wrap container-fluid justify-content-center align-items-start"
     >
       <BaseCard
-        v-for="(post, idx) in filteredUserByName"
-        :key="idx"
+        v-for="post in filteredUserByName"
+        :key="post.id"
         :author="post.author"
         :post="post.body"
         :title="post.title"
