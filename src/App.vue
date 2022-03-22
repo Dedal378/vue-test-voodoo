@@ -33,10 +33,10 @@ const getData = async(apiName = 'posts', limit = postsLimit) => {
 }
 
 const mergeArraysByName = () => {
-  posts.value.filter(i1 =>
-    users.value.find(i2 => {
-      if (i2.id === i1.userId) {
-        i1.author = i2.name
+  posts.value.filter(post =>
+    users.value.find(user => {
+      if (user.id === post.userId) {
+        post.author = user.name
       }
     })
   )
