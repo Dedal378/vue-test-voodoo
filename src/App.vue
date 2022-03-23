@@ -1,10 +1,9 @@
 <script setup>
 import { computed, onBeforeMount, ref } from 'vue'
-import axios from 'axios'
+import { TypicodeCom } from './axios.js'
 import BaseSearch from './components/BaseSearch.vue'
 import BaseCard from './components/BaseCard.vue'
 
-const link = import.meta.env.VITE_APP_LINK_API
 const postsLimit = 30
 let posts = ref([])
 let users = ref([])
@@ -18,20 +17,21 @@ const filteredUserByName = computed(() => {
     return posts.value
   })
 })
-const totalPostsNumber = computed(() => {
-  return filteredUserByName.value.length
-})
+const totalPostsNumber = computed(() => filteredUserByName.value.length)
 
-const getData = async(apiName = 'posts', limit = postsLimit) => {
-  let { data } = await axios.get(`${ link }/${ apiName }?_limit=${ limit }`)
+const getData = async (apiName = 'posts', limit = postsLimit) => {
+  try {
+    let { data } = await TypicodeCom(`/${apiName}?_limit=${limit}`)
 
-  if (apiName === 'posts') {
-    posts.value = data
-  } else if (apiName === 'users') {
-    users.value = data
+    if (apiName === 'posts') {
+      posts.value = data
+    } else if (apiName === 'users') {
+      users.value = data
+    }
+  } catch (e) {
+    throw new Error(e)
   }
 }
-
 const mergeArraysByName = () => {
   posts.value.filter(post =>
     users.value.find(user => {
