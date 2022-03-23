@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeMount, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { TypicodeCom } from './axios.js'
 import BaseSearch from './components/BaseSearch.vue'
 import BaseCard from './components/BaseCard.vue'
@@ -43,7 +43,7 @@ const mergeArraysByName = () => {
   )
 }
 
-onBeforeMount(async () => {
+onMounted(async () => {
   await getData()
   await getData('users', 3)
   await mergeArraysByName()
