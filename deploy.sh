@@ -12,7 +12,7 @@
 # git commit -m 'deploy'
 
 #  if you are deploying to https://<USERNAME>.github.io/<REPO>
-# git push -f git@github.com:Dedal378/vue-test-voodoo.git main:gh-pages
+# git push -f git@github.com:Dedal378/vue3-bootstrap-template.git main:gh-pages
 
 # or
 # git subtree push --prefix dist origin gh-pages
