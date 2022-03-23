@@ -32,6 +32,7 @@ const getData = async (apiName = 'posts', limit = postsLimit) => {
     throw new Error(e)
   }
 }
+
 const mergeArraysByName = () => {
   posts.value.filter(post =>
     users.value.find(user => {
