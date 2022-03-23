@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onBeforeMount, ref } from 'vue'
 import { TypicodeCom } from './axios.js'
 import BaseSearch from './components/BaseSearch.vue'
 import BaseCard from './components/BaseCard.vue'
@@ -32,7 +32,6 @@ const getData = async (apiName = 'posts', limit = postsLimit) => {
     throw new Error(e)
   }
 }
-
 const mergeArraysByName = () => {
   posts.value.filter(post =>
     users.value.find(user => {
@@ -43,7 +42,7 @@ const mergeArraysByName = () => {
   )
 }
 
-onMounted(async () => {
+onBeforeMount(async () => {
   await getData()
   await getData('users', 3)
   await mergeArraysByName()
@@ -60,8 +59,13 @@ onMounted(async () => {
 
     <b-row class="mb-2 justify-content-center text-uppercase fw-light">
       Total number of posts is
-      <strong class="px-2 text-uppercase w-auto fw-bold">{{ posts.length }}</strong> by
-      <strong class="px-2 text-uppercase w-auto fw-bold">{{ users.length }}</strong>
+      <strong class="px-2 text-uppercase w-auto fw-bold">
+        {{ posts.length }}
+      </strong>
+      by
+      <strong class="px-2 text-uppercase w-auto fw-bold">
+        {{ users.length }}
+      </strong>
       authors.
     </b-row>
     <b-row
@@ -70,8 +74,13 @@ onMounted(async () => {
     >
       <small>
         Total number of posts
-        <i class="px-2 text-uppercase w-auto">{{ userName }}</i>
-        is<i class="px-2 text-uppercase w-auto">{{ totalPostsNumber }}</i>.
+        <i class="px-2 text-uppercase w-auto">
+          {{ userName }}
+        </i>
+        is
+        <i class="px-2 text-uppercase w-auto">
+          {{ totalPostsNumber }}
+        </i>.
       </small>
     </b-row>
     <b-row
